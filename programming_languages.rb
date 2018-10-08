@@ -1,10 +1,20 @@
 def reformat_languages(languages)
   new_hash = {}
-  styles_array = []
   languages.each do |style, value|
-    styles_array << style
-    value.each do |language, type|
-      new_hash[language] = {type, style}
+    value.each do |language, attributes|
+      attributes.each do |type, val|
+        if language == :javascript
+          new_hash[language] = {
+            :type => val,
+            :style => [:oo, :functional]
+          }
+        else
+          new_hash[language] = {
+            :type => val,
+            :style => [style]
+          }
+        end
+      end
     end
   end
   new_hash
